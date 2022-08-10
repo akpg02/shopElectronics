@@ -1,0 +1,14 @@
+.login-button-width {
+  width: 100%;
+}
+
+.forgot-link {
+  text-decoration: none;
+  float: right;
+  font-weight: 600;
+}
+
+.register-link {
+  text-decoration: none;
+  font-weight: 600;
+}

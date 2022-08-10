@@ -1,0 +1,9 @@
+.icon-combo {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.icon-combo span {
+  padding-left: 5px;
+}
