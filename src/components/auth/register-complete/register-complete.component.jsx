@@ -30,10 +30,8 @@ const RegisterComplete = () => {
     try {
       const userObj = { name, email };
       await dispatch(registerUser(token, userObj));
-      toast.success("Registration successful");
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
     }
   };
 
@@ -71,7 +69,6 @@ const RegisterComplete = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
     }
   };
 

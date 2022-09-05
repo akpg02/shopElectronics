@@ -21,7 +21,7 @@ const AdminNavigation = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/admin/category">
+            <Link className="nav-link" to="/admin/category/create">
               Category
             </Link>
           </li>

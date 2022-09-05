@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-
 import { loginUser } from "../../../store/auth/auth.action";
 import { selectCurrentUser } from "../../../store/auth/auth.selector";
 
@@ -35,11 +33,8 @@ const Login = () => {
   const handleLoginUser = async (token) => {
     try {
       await dispatch(loginUser(token, { email }));
-
-      toast.success("Login successful");
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
     }
   };
 
@@ -57,7 +52,6 @@ const Login = () => {
     } catch (error) {
       setLoading(false);
       console.log(error);
-      toast.error(error.message);
     }
     setEmail("");
     setPassword("");
@@ -69,10 +63,9 @@ const Login = () => {
       const response = await signInWithGooglePopup();
       const { email } = response.user;
       const { token } = await response.user.getIdTokenResult();
-      dispatch(loginUser(token, { email }));
+      await dispatch(loginUser(token, { email }));
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
     }
   };
 

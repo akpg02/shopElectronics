@@ -1,5 +1,6 @@
 import { axiosAuth, axiosPublic } from "../../utils/api/axios";
 import { CATEGORY_ACTION_TYPES } from "./category.types";
+import { toast } from "react-toastify";
 
 export const fetchCategory = (slug) => async (dispatch) => {
   try {
@@ -12,7 +13,7 @@ export const fetchCategory = (slug) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_ACTION_TYPES.FETCH_CATEGORY_FAILED,
-      payload: error.message,
+      payload: error.response.data,
     });
   }
 };
@@ -28,7 +29,7 @@ export const fetchCategories = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
-      payload: error.message,
+      payload: error.response.data,
     });
   }
 };
@@ -44,7 +45,7 @@ export const removeCategory = (slug) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_ACTION_TYPES.REMOVE_CATEGORY_FAILED,
-      payload: error.message,
+      payload: error.response.data,
     });
   }
 };
@@ -60,7 +61,7 @@ export const updateCategory = (slug, category) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: CATEGORY_ACTION_TYPES.UPDATE_CATEGORY_FAILED,
-      payload: error.message,
+      payload: error.response.data,
     });
   }
 };
@@ -73,10 +74,12 @@ export const createCategory = (category) => async (dispatch) => {
       type: CATEGORY_ACTION_TYPES.CREATE_CATEGORY_SUCCESS,
       payload: data,
     });
+    toast.success(`${data.name} successfully created.`);
   } catch (error) {
     dispatch({
       type: CATEGORY_ACTION_TYPES.CREATE_CATEGORY_FAILED,
-      payload: error.message,
+      payload: error.response.data,
     });
+    toast.error(`${error.response.data}`);
   }
 };

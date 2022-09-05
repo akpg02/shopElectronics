@@ -1,34 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import AdminNavigation from "../../../routes/navigation/admin/admin-navigation.component";
-import { selectCurrentUser } from "../../../store/auth/auth.selector";
-import {
-  createCategory,
-} from "../../../store/category/category.action";
+import { createCategory } from "../../../store/category/category.action";
 
 function CategoryCreate() {
   const [name, setName] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const user = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    createCategory({ name }, user.token)
-      .then((res) => {
-        setIsLoading(false);
-        setName("");
-        toast.success(`${res.data.name} successfully created.`);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.log(error);
-        if (error.response.status === 400) {
-          toast.error(error.response.data);
-        }
-      });
+    await dispatch(createCategory({ name }));
+    setName("");
   };
 
   const categoryForm = () => (
