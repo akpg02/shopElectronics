@@ -14,8 +14,8 @@ import "./login.styles.css";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("opps4lrng@gmail.com");
+  const [password, setPassword] = useState("123456");
   const { user } = useSelector(selectCurrentUser);
   const [loading, setLoading] = useState(false);
 

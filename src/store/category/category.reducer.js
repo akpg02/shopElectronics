@@ -31,7 +31,7 @@ export const categoryReducer = (
     case CATEGORY_ACTION_TYPES.UPDATE_CATEGORY_SUCCESS:
       return {
         ...state,
-        category: { ...state.category, payload },
+        category: payload,
         isPending: false,
         error: null,
         categories: [],
@@ -39,7 +39,7 @@ export const categoryReducer = (
     case CATEGORY_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS:
       return {
         ...state,
-        categories: [...state.categories, payload],
+        categories: payload,
         isPending: false,
         error: null,
         category: null,
