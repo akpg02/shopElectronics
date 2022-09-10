@@ -56,7 +56,6 @@ export const updateCategory = (slug, category) => async (dispatch) => {
   try {
     dispatch({ type: CATEGORY_ACTION_TYPES.UPDATE_CATEGORY_PENDING });
     const { data } = await axiosAuth.put(`/category/${slug}`, category);
-    console.log("this is data in updateCategory: ", data);
     dispatch({
       type: CATEGORY_ACTION_TYPES.UPDATE_CATEGORY_SUCCESS,
       payload: data,

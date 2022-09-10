@@ -4,6 +4,8 @@ import AdminRoute from "../../routes/protected/admin/admin-private-route.compone
 import Dashboard from "../../components/admin/dashboard/dashboard.component";
 import CategoryCreate from "../../components/admin/category/category-create.component";
 import CategoryUpdate from "../../components/admin/category/category-update.component";
+import SubCreate from "../../components/admin/sub/sub-create.component";
+import SubUpdate from "../../components/admin/sub/sub-update.component";
 
 const Admin = () => {
   return (
@@ -12,6 +14,8 @@ const Admin = () => {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="category" element={<CategoryCreate />} />
         <Route path="category/:slug" element={<CategoryUpdate />} />
+        <Route path="sub" element={<SubCreate />} />
+        <Route path="sub/:slug" element={<SubUpdate />} />
       </Route>
     </Routes>
   );
