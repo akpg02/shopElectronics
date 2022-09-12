@@ -7,6 +7,7 @@ import { onAuthStateChangedListener } from "./utils/firebase/firebase.utils";
 import { fetchUser } from "./store/auth/auth.action";
 
 import "react-toastify/dist/ReactToastify.css";
+import "antd/dist/antd.css";
 import "./App.css";
 
 const PrimaryNavbar = lazy(() =>

@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import AdminNavigation from "../../../routes/navigation/admin/admin-navigation.component";
 import CategoryForm from "../../forms/category/category-form.component";
-import { fetchSub, removeSub, updateSub } from "../../../store/sub/sub.action";
+import { fetchSub, updateSub } from "../../../store/sub/sub.action";
 import { fetchCategories } from "../../../store/category/category.action";
 
 import { selectCurrentCategory } from "../../../store/category/category.selector";
 import { selectCurrentSub } from "../../../store/sub/sub.selector";
-
-import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import LocalSearch from "../../forms/search/local-search.component";
 
 function SubUpdate() {
   const dispatch = useDispatch();

@@ -51,7 +51,7 @@ export const subReducer = (state = INITIAL_STATE_SUB, action = {}) => {
         error: payload,
         isPending: false,
         sub: null,
-        subs: null,
+        subs: [],
       };
     default:
       return state;

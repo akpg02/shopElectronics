@@ -34,6 +34,23 @@ export const fetchSubs = () => async (dispatch) => {
   }
 };
 
+export const fetchCategorySubs = (_id) => async (dispatch) => {
+  console.log('')
+  try {
+    dispatch({ type: SUB_ACTION_TYPES.FETCH_SUBS_PENDING });
+    const { data } = await axiosPublic.get(`/category/subs/${_id}`);
+    dispatch({
+      type: SUB_ACTION_TYPES.FETCH_SUBS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SUB_ACTION_TYPES.FETCH_SUBS_FAILED,
+      payload: error.response.data,
+    });
+  }
+};
+
 export const removeSub = (slug) => async (dispatch) => {
   try {
     dispatch({ type: SUB_ACTION_TYPES.REMOVE_SUB_PENDING });
