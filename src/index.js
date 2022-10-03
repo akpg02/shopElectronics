@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./index.css";
+import "antd/dist/antd.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";

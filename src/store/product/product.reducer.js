@@ -1,7 +1,7 @@
 import { PRODUCT_ACTION_TYPES } from "./product.types";
 
 const INITIAL_STATE_PRODUCT = {
-  product: null,
+  product: { images: [] },
   products: [],
   isPending: false,
   error: null,
@@ -19,7 +19,18 @@ export const productReducer = (state = INITIAL_STATE_PRODUCT, action = {}) => {
         ...state,
         isPending: true,
         error: null,
-        product: null,
+        product: { ...state.product },
+        products: [],
+      };
+    case PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_PENDING:
+    case PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_PENDING:
+    case PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_PENDING:
+    case PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_PENDING:
+      return {
+        ...state,
+        isPending: true,
+        error: null,
+        product: { ...state.product },
         products: [],
       };
     case PRODUCT_ACTION_TYPES.FETCH_PRODUCT_SUCCESS:
@@ -33,10 +44,41 @@ export const productReducer = (state = INITIAL_STATE_PRODUCT, action = {}) => {
         error: null,
         products: [],
       };
+    case PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_SUCCESS:
+      return {
+        ...state,
+        isPending: false,
+        error: null,
+        product: {
+          ...state.product,
+          images: [...state.product.images, payload],
+        },
+        products: [],
+      };
+    case PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_SUCCESS:
+      return {
+        ...state,
+        product: { images: [] },
+        isPending: false,
+        error: null,
+        products: [],
+      };
+    case PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_SUCCESS:
+    case PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_SUCCESS:
+      return {
+        ...state,
+        isPending: false,
+        error: null,
+        product: {
+          ...state.product,
+          images: payload,
+        },
+        products: [],
+      };
     case PRODUCT_ACTION_TYPES.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
-        categories: payload,
+        products: payload,
         isPending: false,
         error: null,
         product: null,
@@ -46,12 +88,16 @@ export const productReducer = (state = INITIAL_STATE_PRODUCT, action = {}) => {
     case PRODUCT_ACTION_TYPES.REMOVE_PRODUCT_FAILED:
     case PRODUCT_ACTION_TYPES.FETCH_PRODUCTS_FAILED:
     case PRODUCT_ACTION_TYPES.UPDATE_PRODUCT_FAILED:
+    case PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_FAILED:
+    case PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_FAILED:
+    case PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_FAILED:
+    case PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_FAILED:
       return {
         ...state,
         error: payload,
         isPending: false,
-        product: null,
-        products: null,
+        product: { ...state.product },
+        products: [],
       };
     default:
       return state;

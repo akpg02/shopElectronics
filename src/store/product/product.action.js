@@ -87,3 +87,68 @@ export const createProduct = (product) => async (dispatch) => {
     toast.error(`${error.response.data.error}`);
   }
 };
+
+export const resetCloudinary = () => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_PENDING });
+    dispatch({ type: PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.RESET_CLOUDINARY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const updateCloudinary = (public_id, images) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_PENDING });
+    const filteredImages = images.filter(
+      (image) => image.public_id !== public_id
+    );
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_SUCCESS,
+      payload: filteredImages,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.UPDATE_CLOUDINARY_FAILED,
+      payload: error,
+    });
+  }
+};
+
+export const uploadToCloudinary = (uri) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_PENDING });
+    const { data } = await axiosAuth.post("/uploadimages", { image: uri });
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.UPLOAD_CLOUDINARY_FAILED,
+      payload: error.response.data,
+    });
+    toast.error(`image(s) upload failed; ${error.response.data}`);
+  }
+};
+
+export const removeFromCloudinary = (public_id) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_PENDING });
+    const { data } = await axiosAuth.post("/removeimage", { public_id });
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_SUCCESS,
+      payload: data,
+    });
+    toast.success(`image successfully deleted`);
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ACTION_TYPES.REMOVE_CLOUDINARY_FAILED,
+      payload: error.response.data,
+    });
+    toast.error(`image deletion failed`);
+  }
+};
