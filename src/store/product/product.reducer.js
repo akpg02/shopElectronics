@@ -81,7 +81,7 @@ export const productReducer = (state = INITIAL_STATE_PRODUCT, action = {}) => {
         products: payload,
         isPending: false,
         error: null,
-        product: null,
+        product: { ...state.product },
       };
     case PRODUCT_ACTION_TYPES.FETCH_PRODUCT_FAILED:
     case PRODUCT_ACTION_TYPES.CREATE_PRODUCT_FAILED:

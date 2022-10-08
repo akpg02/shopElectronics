@@ -18,17 +18,17 @@ export const fetchProduct = (slug) => async (dispatch) => {
   }
 };
 
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProductsByCount = (count) => async (dispatch) => {
   try {
-    dispatch({ type: PRODUCT_ACTION_TYPES.FETCH_CATEGORIES_PENDING });
-    const { data } = await axiosPublic.get("/categories");
+    dispatch({ type: PRODUCT_ACTION_TYPES.FETCH_PRODUCTS_PENDING });
+    const { data } = await axiosPublic.get(`/products/${count}`);
     dispatch({
-      type: PRODUCT_ACTION_TYPES.FETCH_CATEGORIES_SUCCESS,
+      type: PRODUCT_ACTION_TYPES.FETCH_PRODUCTS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: PRODUCT_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
+      type: PRODUCT_ACTION_TYPES.FETCH_PRODUCTS_FAILED,
       payload: error.response.data.error,
     });
   }

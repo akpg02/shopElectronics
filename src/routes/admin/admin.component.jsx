@@ -7,7 +7,7 @@ import CategoryUpdate from "../../components/admin/category/category-update.comp
 import SubCreate from "../../components/admin/sub/sub-create.component";
 import SubUpdate from "../../components/admin/sub/sub-update.component";
 import ProductCreate from "../../components/admin/product/product-create.component";
-
+import Products from "../../components/admin/products/products.component";
 const Admin = () => {
   return (
     <Routes>
@@ -18,6 +18,7 @@ const Admin = () => {
         <Route path="sub" element={<SubCreate />} />
         <Route path="sub/:slug" element={<SubUpdate />} />
         <Route path="product" element={<ProductCreate />} />
+        <Route path="products" element={<Products />} />
       </Route>
     </Routes>
   );
