@@ -48,7 +48,7 @@ export const removeProduct = (slug) => async (dispatch) => {
       type: PRODUCT_ACTION_TYPES.REMOVE_PRODUCT_FAILED,
       payload: error.response.data.error,
     });
-    toast.error(`${error.response.data.error}`);
+    toast.error(`${error.response.data}`);
   }
 };
 
